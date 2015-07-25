@@ -1,0 +1,22 @@
+{
+  "name": "webuilder240/is-php",
+  "description": "this labrary is is.js inspired Library for php",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nishio Takuya",
+      "email": "littlecub240@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}
