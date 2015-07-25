@@ -1,6 +1,6 @@
 # is.php
 
-[![Latest Stable Version](https://poser.pugx.org/webuilder240/is-php/version)](https://packagist.org/packages/webuilder240/is-php) [![Build Status](https://travis-ci.org/webuilder240/is.php.svg?branch=master)](https://travis-ci.org/webuilder240/is.php)
+[[![Code Coverage](https://scrutinizer-ci.com/g/webuilder240/is.php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/webuilder240/is.php/?branch=master) ![Latest Stable Version](https://poser.pugx.org/webuilder240/is-php/version)](https://packagist.org/packages/webuilder240/is-php) [![Build Status](https://travis-ci.org/webuilder240/is.php.svg?branch=master)](https://travis-ci.org/webuilder240/is.php)
 
 ## Install
 
