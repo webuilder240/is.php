@@ -17,24 +17,39 @@ class Is
      * @var array
      */
     private $_SERVER;
+    private $same_name;
 
     /**
-     * set $_SERVER
+     * set $_SERVER,$php_same_name
      */
     public function __construct()
     {
         $this->_SERVER = $_SERVER;
+        $this->same_name = php_sapi_name();
     }
 
     /**
      * テスト用にSet出来るようにしている。
-     * 本当はsetできない方向にしたいが、
+     * 本当はsetできない方向にしたい
+     *
+     * for unit test
      */
     public function set_SERVER($key,$value)
     {
         if($value !== null){
             $this->_SERVER[$key] = $value;
         }
+    }
+
+    /**
+     * テスト用にSet出来るようにしている。
+     * 本当はsetできない方向にしたい
+     *
+     * for unit test
+     */
+    public function set_php_same_name($value)
+    {
+        $this->php_same_name = $value;
     }
 
     /**
@@ -114,8 +129,8 @@ class Is
      */
     public function ssl()
     {
-        if (isset($this->_SERVER['HTTPS'])) {
-            if ($this->_SERVER['HTTPS'] === 'on') {
+        if (isset($this->_SERVER['HTTPS']) && isset($this->_SERVER['HTTP_HTTPS'])) {
+            if ($this->_SERVER['HTTPS'] === 'on' || $this->_SERVER['HTTP_HTTPS'] === '1') {
                 return $this->_return_result(true);
             }
         }
@@ -136,14 +151,6 @@ class Is
     public function cli()
     {
         return $this->_check_sapi_name('cli');
-    }
-
-    /**
-     * @return bool
-     */
-    public function fpm()
-    {
-        return $this->_check_sapi_name('fpm-fcgi');
     }
 
     /**
@@ -195,7 +202,7 @@ class Is
      */
     public function tablet()
     {
-        $ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+        $ua = mb_strtolower($this->_SERVER['HTTP_USER_AGENT']);
         $tablet_lists = [
             'ipad',
             'android',
@@ -239,6 +246,8 @@ class Is
                 return $this->_return_result(true);
             }
         }
+
+        return $this->_return_result(false);
     }
 
     /**

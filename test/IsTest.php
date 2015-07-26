@@ -39,9 +39,17 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->ssl());
         $this->assertTrue($this->is->not()->ssl());
 
+        //emulated chrome set always set https : 1
+        $this->is->set_SERVER('HTTPS','1');
+        $this->assertFalse($this->is->ssl());
+        $this->assertTrue($this->is->not()->ssl());
+
+        // emulated ssl
         $this->is->set_SERVER('HTTPS','on');
+        $this->is->set_SERVER('HTTP_HTTPS','1');
         $this->assertTrue($this->is->ssl());
         $this->assertFalse($this->is->not()->ssl());
+
     }
 
     public function testApache()
@@ -50,7 +58,6 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->not()->apache());
 
         $this->is->set_SERVER('SERVER_SOFTWARE','Apache Version: 2.2.10 (Unix)');
-
         $this->assertTrue($this->is->apache());
         $this->assertFalse($this->is->not()->apache());
     }
@@ -61,7 +68,6 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->not()->build_in_server());
 
         $this->is->set_SERVER('SERVER_SOFTWARE','PHP 5.6.11 Development Server');
-
         $this->assertTrue($this->is->build_in_server());
         $this->assertFalse($this->is->not()->build_in_server());
     }
@@ -135,33 +141,6 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->request_delete());
         $this->assertTrue($this->is->not()->request_delete());
     }
-
-//    public function testRunUnit()
-//    {
-//        $this->assertTrue($this->is->run_unit());
-//        $this->assertFalse($this->is->not()->run_unit());
-//
-//        $this->is->set_SERVER('REQUEST_METHOD','GET');
-//
-//        $_SERVER['argv'][0] = "";
-//        $this->assertFalse($this->is->run_unit());
-//        $this->assertTrue($this->is->not()->run_unit());
-//
-//        $_SERVER['argv'][0] = "vendor/bin/phpspec";
-//        $this->assertFalse($this->is->run_unit());
-//        $this->assertTrue($this->is->not()->run_unit());
-//    }
-//
-//    public function testRunSpec()
-//    {
-//        $_SERVER['argv'][0] = "vendor/bin/phpspec";
-//        $this->assertTrue($this->is->run_spec());
-//        $this->assertFalse($this->is->not()->run_spec());
-//
-//        $_SERVER['argv'][0] = "vendor/bin/phpunit";
-//        $this->assertFalse($this->is->run_spec());
-//        $this->assertTrue($this->is->not()->run_spec());
-//    }
 
     public function testEmail()
     {
@@ -278,5 +257,27 @@ class IsTest extends PHPUnit_Framework_TestCase
     }
 
     public function testTablet()
-    {}
+    {
+        // Android Tablet
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 7 Build/LMY48G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.93 Safari/537.36');
+        $this->assertTrue($this->is->tablet());
+
+        // Android Mobile
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LMY47Z) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.93 Mobile Safari/537.36');
+        $this->assertFalse($this->is->tablet());
+        $this->assertTrue($this->is->not()->tablet());
+
+        // iPad
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (iPad; CPU OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53');
+        $this->assertTrue($this->is->tablet());
+
+        //iPhone
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12H143 Safari/600.1.4');
+        $this->assertFalse($this->is->tablet());
+        $this->assertTrue($this->is->not()->tablet());
+    }
 }
