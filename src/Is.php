@@ -13,6 +13,31 @@ class Is
     private $not_flg = false;
 
     /**
+     * $_SERVER
+     * @var array
+     */
+    private $_SERVER;
+
+    /**
+     * set $_SERVER
+     */
+    public function __construct()
+    {
+        $this->_SERVER = $_SERVER;
+    }
+
+    /**
+     * テスト用にSet出来るようにしている。
+     * 本当はsetできない方向にしたいが、
+     */
+    public function set_SERVER($key,$value)
+    {
+        if($value !== null){
+            $this->_SERVER[$key] = $value;
+        }
+    }
+
+    /**
      * @return $this
      */
     public function not()
@@ -76,8 +101,8 @@ class Is
      */
     private function _check_server_software($soft_name)
     {
-        if (isset($_SERVER['SERVER_SOFTWARE'])) {
-            if (strpos($_SERVER['SERVER_SOFTWARE'], $soft_name) !== false) {
+        if (isset($this->_SERVER['SERVER_SOFTWARE'])) {
+            if (strpos($this->_SERVER['SERVER_SOFTWARE'], $soft_name) !== false) {
                 return true;
             }
         }
@@ -89,8 +114,8 @@ class Is
      */
     public function ssl()
     {
-        if (isset($_SERVER['HTTPS'])) {
-            if ($_SERVER['HTTPS'] === 'on') {
+        if (isset($this->_SERVER['HTTPS'])) {
+            if ($this->_SERVER['HTTPS'] === 'on') {
                 return $this->_return_result(true);
             }
         }
@@ -140,6 +165,101 @@ class Is
         return $this->_return_result($this->_check_browser("Android"));
     }
 
+
+    public function mobile()
+    {
+        $mobile_lists = [
+            'ipod',
+            'iphone',
+            'android',
+            'firefox',
+            'blackberry',
+        ];
+
+        foreach ($mobile_lists as $mobile){
+            if ($mobile === 'firefox' || $mobile === 'android'){
+                $result = $this->_check_mobile_agent($mobile,'mobile');
+            } else {
+                $result = $this->_check_mobile_agent($mobile);
+            }
+            if ($result){
+                return $this->_return_result(true);
+            }
+        }
+
+        return $this->_return_result(false);
+    }
+
+    /**
+     * @return bool
+     */
+    public function tablet()
+    {
+        $ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+        $tablet_lists = [
+            'ipad',
+            'android',
+            'kindle',
+            'firefox',
+            'playbook',
+            'windows',
+        ];
+
+        foreach ($tablet_lists as $tablet){
+
+            if ($tablet === 'android'){
+                if (strpos($ua,'android') !== false && strpos($ua, 'mobile') === false){
+                    $result = true;
+                } else {
+                    $result = false;
+                }
+            } elseif ($tablet === 'firefox'){
+                if (strpos($ua,'firefox') !== false && strpos($ua, 'tablet') !== false){
+                    $result = true;
+                } else {
+                    $result = false;
+                }
+            } elseif ($tablet === 'windows'){
+                if (strpos($ua,'windows') !== false && strpos($ua, 'touch') !== false){
+                    $result = true;
+                } else {
+                    $result = false;
+                }
+            } elseif($tablet === 'kindle'){
+                if (strpos($ua,'kindle') !== false || strpos($ua, 'silk') !== false){
+                    $result = true;
+                } else {
+                    $result = false;
+                }
+            } else {
+                $result = $this->_check_mobile_agent($tablet);
+            }
+
+            if ($result){
+                return $this->_return_result(true);
+            }
+        }
+    }
+
+    /**
+     * @param $params
+     */
+    private function _check_mobile_agent($params,$key = null)
+    {
+        $ua = mb_strtolower($this->_SERVER['HTTP_USER_AGENT']);
+        if ($key){
+            if (strpos($ua,$params) !== false && strpos($ua,$key) !== false){
+                return true;
+            }
+        } else {
+            if (strpos($ua,$params) !== false){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * @return bool
      */
@@ -174,8 +294,8 @@ class Is
      */
     private function _check_browser($preg_string)
     {
-        if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            if (strpos($_SERVER['HTTP_USER_AGENT'], $preg_string) !== false) {
+        if (isset($this->_SERVER['HTTP_USER_AGENT'])) {
+            if (strpos($this->_SERVER['HTTP_USER_AGENT'], $preg_string) !== false) {
                 return true;
             }
         }
@@ -204,11 +324,11 @@ class Is
      */
     public function localhost()
     {
-        if (!isset($_SERVER['SERVER_NAME'])) {
+        if (!isset($this->_SERVER['SERVER_NAME'])) {
             return $this->_return_result(false);
         }
 
-        if ($_SERVER['SERVER_NAME'] === '127.0.0.1' || $_SERVER['SERVER_NAME'] === 'localhost') {
+        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost') {
             return $this->_return_result(true);
         }
 
@@ -221,11 +341,11 @@ class Is
      */
     public function lang($lang)
     {
-        if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        if (!isset($this->_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return false;
         }
 
-        $server_langs = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $server_langs = explode(",", $this->_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         foreach ($server_langs as $server_lang) {
             if (preg_match('/^'.$lang.'/i', $server_lang)) {
@@ -258,7 +378,7 @@ class Is
      */
     private function _check_http_method($check_type)
     {
-        if ($_SERVER['REQUEST_METHOD'] === $check_type) {
+        if ($this->_SERVER['REQUEST_METHOD'] === $check_type) {
             return true;
         }
         return false;
@@ -310,8 +430,8 @@ class Is
      */
     public function run_unit()
     {
-        if (isset($_SERVER['argv'])) {
-            $argv = $_SERVER['argv'][0];
+        if (isset($this->_SERVER['argv'])) {
+            $argv = $this->_SERVER['argv'][0];
             if (strpos($argv, 'phpunit') !== false) {
                 return $this->_return_result(true);
             }
@@ -325,8 +445,8 @@ class Is
      */
     public function run_spec()
     {
-        if (isset($_SERVER['argv'])) {
-            $argv = $_SERVER['argv'][0];
+        if (isset($this->_SERVER['argv'])) {
+            $argv = $this->_SERVER['argv'][0];
             if (strpos($argv, 'phpspec') !== false) {
                 return $this->_return_result(true);
             }
