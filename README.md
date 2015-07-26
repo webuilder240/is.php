@@ -12,7 +12,7 @@ composer require webuilder240/is-php
 
 is.jsにインスパイアを受けてphpに持ち込んでみました。~~コードが汚い~~
 
-# Server Side Check:
+# Web Server Check:
 
 ## is->apache()
 
@@ -39,6 +39,64 @@ $is->build_in_server();
 
 $is->not()->build_in_server();
 // true if current run server is not php build_in_server(cli-server)
+
+```
+
+# Server Check:
+
+## is->ssl()
+
+``` php
+
+$is = new Is\Is();
+
+$is->ssl(); 
+// true if current run server protocol is 'ssl'
+
+$is->not()->ssl();
+// true if current run server protocol is not 'ssl'
+
+```
+
+## is->localhost()
+
+``` php
+
+$is = new Is\Is();
+
+$is->localhost(); 
+// true if current run server ip is 'localhost' or 127.0.0.1
+
+$is->not()->localhost();
+// true if current run server ip is not 'localhost' or 127.0.0.1
+
+```
+
+## is->host(value:string)
+
+``` php
+
+$is = new Is\Is();
+
+$is->host('www.google.com'); 
+// true if current run server host name is 'www.google.com'
+
+$is->not()->host('www.google.com');
+// true if current run server host name is not 'www.google.com'
+
+```
+
+## is->host_ip(value:string)
+
+``` php
+
+$is = new Is\Is();
+
+$is->host_ip('192.168.56.101'); 
+// true if current run server host ip address '192.168.56.101'
+
+$is->not()->host('192.168.56.101');
+// true if current run server host ip address is not '192.168.56.101'
 
 ```
 

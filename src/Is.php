@@ -140,6 +140,61 @@ class Is
     /**
      * @return bool
      */
+    public function localhost()
+    {
+        if (!isset($this->_SERVER['SERVER_NAME'])) {
+            return $this->_return_result(false);
+        }
+
+        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost') {
+            return $this->_return_result(true);
+        }
+
+        return $this->_return_result(false);
+    }
+
+    /**
+     * @param $host string
+     * @return bool
+     */
+    public function host($host)
+    {
+        if (!isset($this->_SERVER['SERVER_NAME'])) {
+            return $this->_return_result(false);
+        }
+
+        if ($host === "localhost" || $host === '127.0.0.1'){
+            return $this->localhost();
+        }
+
+        if ($this->_SERVER['SERVER_NAME'] === $host) {
+            return $this->_return_result(true);
+        }
+
+        return $this->_return_result(false);
+    }
+
+    /**
+     * @param $ip string
+     * @return bool
+     */
+    public function host_ip($ip)
+    {
+        if (!isset($this->_SERVER['SERVER_ADDR'])) {
+            return $this->_return_result(false);
+        }
+
+        if ($this->_SERVER['SERVER_ADDR'] === $ip) {
+            return $this->_return_result(true);
+        }
+
+        return $this->_return_result(false);
+    }
+
+
+    /**
+     * @return bool
+     */
     public function build_in_server()
     {
         return $this->_return_result($this->_check_server_software("Development"));
@@ -328,23 +383,6 @@ class Is
     public function opera()
     {
         return $this->_return_result($this->_check_browser("Opera"));
-    }
-
-    /**
-     * @todo SERVER_NAMEは扱いにくい場合がある。他の方法があるようであれば、その方法で実装する。
-     * @return bool
-     */
-    public function localhost()
-    {
-        if (!isset($this->_SERVER['SERVER_NAME'])) {
-            return $this->_return_result(false);
-        }
-
-        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost') {
-            return $this->_return_result(true);
-        }
-
-        return $this->_return_result(false);
     }
 
     /**
