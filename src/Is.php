@@ -173,6 +173,9 @@ class Is
     }
 
 
+    /**
+     * @return bool
+     */
     public function mobile()
     {
         $mobile_lists = [
