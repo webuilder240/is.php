@@ -314,7 +314,19 @@ class IsTest extends PHPUnit_Framework_TestCase
 
     public function testChrome()
     {
+        // Chrome
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36');
 
+        $this->assertTrue($this->is->chrome());
+        $this->assertFalse($this->is->not()->chrome());
+
+        // Not Chrome
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->chrome());
+        $this->assertTrue($this->is->not()->chrome());
     }
 
     public function testOpera()
