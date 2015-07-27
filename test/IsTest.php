@@ -331,6 +331,19 @@ class IsTest extends PHPUnit_Framework_TestCase
 
     public function testOpera()
     {
+        // Opera
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; ja) Presto/2.10.289 Version/12.00');
+
+        $this->assertTrue($this->is->opera());
+        $this->assertFalse($this->is->not()->opera());
+
+        // Not Opera
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->opera());
+        $this->assertTrue($this->is->not()->opera());
 
     }
 
