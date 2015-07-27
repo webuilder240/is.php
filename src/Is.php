@@ -370,11 +370,20 @@ class Is
     }
 
     /**
+     * @param $version int
      * @return bool
      */
-    public function ie()
+    public function ie($version = null)
     {
-        return $this->_return_result($this->_check_browser("MSIE"));
+        if ($version){
+            $version = strval($version) . '.0';
+            if ($this->_check_browser("MSIE") && strpos($this->_SERVER['HTTP_USER_AGENT'],$version) !== false){
+                return $this->_return_result(true);
+            }
+            return $this->_return_result(false);
+        } else {
+            return $this->_return_result($this->_check_browser("MSIE"));
+        }
     }
 
     /**

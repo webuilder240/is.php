@@ -280,4 +280,32 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->tablet());
         $this->assertTrue($this->is->not()->tablet());
     }
+
+    public function testIE()
+    {
+        // IE8
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/4.0 (compatible; GoogleToolbar 5.0.2124.2070; Windows 6.0; MSIE 8.0.6001.18241)');
+
+        $this->assertTrue($this->is->ie());
+        $this->assertTrue($this->is->ie(8));
+        $this->assertFalse($this->is->not()->ie(8));
+
+        // IE9
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)');
+
+        $this->assertTrue($this->is->ie());
+        $this->assertFalse($this->is->not()->ie());
+        $this->assertFalse($this->is->ie(8));
+        $this->assertTrue($this->is->ie(9));
+
+        // Not IE
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36');
+
+        $this->assertFalse($this->is->ie());
+        $this->assertTrue($this->is->not()->ie());
+
+    }
 }
