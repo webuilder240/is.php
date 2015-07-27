@@ -34,9 +34,9 @@ class Is
      *
      * for unit test
      */
-    public function set_SERVER($key,$value)
+    public function set_SERVER($key, $value)
     {
-        if($value !== null){
+        if ($value !== null) {
             $this->_SERVER[$key] = $value;
         }
     }
@@ -163,7 +163,7 @@ class Is
             return $this->_return_result(false);
         }
 
-        if ($host === "localhost" || $host === '127.0.0.1' || $host === '0.0.0.0'){
+        if ($host === "localhost" || $host === '127.0.0.1' || $host === '0.0.0.0') {
             return $this->localhost();
         }
 
@@ -241,13 +241,13 @@ class Is
             'blackberry',
         ];
 
-        foreach ($mobile_lists as $mobile){
-            if ($mobile === 'firefox' || $mobile === 'android'){
-                $result = $this->_check_mobile_agent($mobile,'mobile');
+        foreach ($mobile_lists as $mobile) {
+            if ($mobile === 'firefox' || $mobile === 'android') {
+                $result = $this->_check_mobile_agent($mobile, 'mobile');
             } else {
                 $result = $this->_check_mobile_agent($mobile);
             }
-            if ($result){
+            if ($result) {
                 return $this->_return_result(true);
             }
         }
@@ -270,28 +270,28 @@ class Is
             'windows',
         ];
 
-        foreach ($tablet_lists as $tablet){
+        foreach ($tablet_lists as $tablet) {
 
-            if ($tablet === 'android'){
-                if (strpos($ua,'android') !== false && strpos($ua, 'mobile') === false){
+            if ($tablet === 'android') {
+                if (strpos($ua, 'android') !== false && strpos($ua, 'mobile') === false) {
                     $result = true;
                 } else {
                     $result = false;
                 }
-            } elseif ($tablet === 'firefox'){
-                if (strpos($ua,'firefox') !== false && strpos($ua, 'tablet') !== false){
+            } elseif ($tablet === 'firefox') {
+                if (strpos($ua, 'firefox') !== false && strpos($ua, 'tablet') !== false) {
                     $result = true;
                 } else {
                     $result = false;
                 }
-            } elseif ($tablet === 'windows'){
-                if (strpos($ua,'windows') !== false && strpos($ua, 'touch') !== false){
+            } elseif ($tablet === 'windows') {
+                if (strpos($ua, 'windows') !== false && strpos($ua, 'touch') !== false) {
                     $result = true;
                 } else {
                     $result = false;
                 }
-            } elseif($tablet === 'kindle'){
-                if (strpos($ua,'kindle') !== false || strpos($ua, 'silk') !== false){
+            } elseif ($tablet === 'kindle') {
+                if (strpos($ua, 'kindle') !== false || strpos($ua, 'silk') !== false) {
                     $result = true;
                 } else {
                     $result = false;
@@ -300,7 +300,7 @@ class Is
                 $result = $this->_check_mobile_agent($tablet);
             }
 
-            if ($result){
+            if ($result) {
                 return $this->_return_result(true);
             }
         }
@@ -311,15 +311,15 @@ class Is
     /**
      * @param $params
      */
-    private function _check_mobile_agent($params,$key = null)
+    private function _check_mobile_agent($params, $key = null)
     {
         $ua = mb_strtolower($this->_SERVER['HTTP_USER_AGENT']);
-        if ($key){
-            if (strpos($ua,$params) !== false && strpos($ua,$key) !== false){
+        if ($key) {
+            if (strpos($ua, $params) !== false && strpos($ua, $key) !== false) {
                 return true;
             }
         } else {
-            if (strpos($ua,$params) !== false){
+            if (strpos($ua, $params) !== false) {
                 return true;
             }
         }
@@ -375,9 +375,9 @@ class Is
      */
     public function ie($version = null)
     {
-        if ($version){
+        if ($version) {
             $version = strval($version) . '.0';
-            if ($this->_check_browser("MSIE") && strpos($this->_SERVER['HTTP_USER_AGENT'],$version) !== false){
+            if ($this->_check_browser("MSIE") && strpos($this->_SERVER['HTTP_USER_AGENT'], $version) !== false) {
                 return $this->_return_result(true);
             }
             return $this->_return_result(false);
@@ -407,7 +407,7 @@ class Is
         $server_langs = explode(",", $this->_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         foreach ($server_langs as $server_lang) {
-            if (preg_match('/^'.$lang.'/i', $server_lang)) {
+            if (preg_match('/^' . $lang . '/i', $server_lang)) {
                 return $this->_return_result(true);
             }
         }
