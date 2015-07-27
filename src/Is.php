@@ -146,7 +146,7 @@ class Is
             return $this->_return_result(false);
         }
 
-        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost') {
+        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost' || $this->_SERVER['SERVER_NAME'] === '0.0.0.0') {
             return $this->_return_result(true);
         }
 
@@ -163,7 +163,7 @@ class Is
             return $this->_return_result(false);
         }
 
-        if ($host === "localhost" || $host === '127.0.0.1'){
+        if ($host === "localhost" || $host === '127.0.0.1' || $host === '0.0.0.0'){
             return $this->localhost();
         }
 

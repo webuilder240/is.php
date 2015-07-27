@@ -78,6 +78,10 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
 
+        $this->is->set_SERVER('SERVER_NAME',"0.0.0.0");
+        $this->assertTrue($this->is->localhost());
+        $this->assertFalse($this->is->not()->localhost());
+
         $this->is->set_SERVER('SERVER_NAME',"localhost");
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
@@ -306,6 +310,25 @@ class IsTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->is->ie());
         $this->assertTrue($this->is->not()->ie());
+    }
+
+    public function testChrome()
+    {
+
+    }
+
+    public function testOpera()
+    {
+
+    }
+
+    public function testFirefox()
+    {
+
+    }
+
+    public function testSafari()
+    {
 
     }
 }
