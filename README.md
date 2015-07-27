@@ -158,7 +158,7 @@ $is->not()->opera();
 
 ```
 
-## is->ie()
+## is->ie(version:int)
 
 ``` php
 
@@ -298,7 +298,7 @@ $is = new Is\Is();
 $is->request_delete(); 
 // true if current request is DELETE request
 
-$is->not()->request_patch(); 
+$is->not()->request_delete(); 
 // true if current request is not DELETE request
 
 ```
