@@ -349,11 +349,33 @@ class IsTest extends PHPUnit_Framework_TestCase
 
     public function testFirefox()
     {
+        // Firefox
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0');
 
+        $this->assertTrue($this->is->firefox());
+        $this->assertFalse($this->is->not()->firefox());
+
+        // Not Firefox
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->firefox());
+        $this->assertTrue($this->is->not()->firefox());
     }
 
     public function testSafari()
     {
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A');
 
+        $this->assertTrue($this->is->safari());
+        $this->assertFalse($this->is->not()->safari());
+
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->safari());
+        $this->assertTrue($this->is->not()->safari());
     }
 }
