@@ -111,7 +111,7 @@ $is = new Is\Is();
 $is->chorme();
 // true if current browser is chrome 
 
-$is->chorme();
+$is->not()->chorme();
 // true if current browser is not chrome 
 
 ```
@@ -125,7 +125,7 @@ $is = new Is\Is();
 $is->firefox();
 // true if current browser is firefox 
 
-$is->firefox();
+$is->not()->firefox();
 // true if current browser is not firefox 
 
 ```
@@ -139,7 +139,7 @@ $is = new Is\Is();
 $is->safari();
 // true if current browser is safari
 
-$is->safari();
+$is->not()->safari();
 // true if current browser is not safari
 
 ```
@@ -153,7 +153,7 @@ $is = new Is\Is();
 $is->opera();
 // true if current browser is opera
 
-$is->opera();
+$is->not()->opera();
 // true if current browser is not opera
 
 ```
@@ -167,7 +167,10 @@ $is = new Is\Is();
 $is->ie();
 // true if current browser is ie
 
-$is->ie();
+$is->ie(8);
+// true if current brower is ie version 8
+
+$is->not()->ie();
 // true if current browser is not ie
 
 ```
