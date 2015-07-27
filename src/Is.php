@@ -146,7 +146,7 @@ class Is
             return $this->_return_result(false);
         }
 
-        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost') {
+        if ($this->_SERVER['SERVER_NAME'] === '127.0.0.1' || $this->_SERVER['SERVER_NAME'] === 'localhost' || $this->_SERVER['SERVER_NAME'] === '0.0.0.0') {
             return $this->_return_result(true);
         }
 
@@ -163,7 +163,7 @@ class Is
             return $this->_return_result(false);
         }
 
-        if ($host === "localhost" || $host === '127.0.0.1'){
+        if ($host === "localhost" || $host === '127.0.0.1' || $host === '0.0.0.0'){
             return $this->localhost();
         }
 
@@ -370,11 +370,20 @@ class Is
     }
 
     /**
+     * @param $version int
      * @return bool
      */
-    public function ie()
+    public function ie($version = null)
     {
-        return $this->_return_result($this->_check_browser("MSIE"));
+        if ($version){
+            $version = strval($version) . '.0';
+            if ($this->_check_browser("MSIE") && strpos($this->_SERVER['HTTP_USER_AGENT'],$version) !== false){
+                return $this->_return_result(true);
+            }
+            return $this->_return_result(false);
+        } else {
+            return $this->_return_result($this->_check_browser("MSIE"));
+        }
     }
 
     /**

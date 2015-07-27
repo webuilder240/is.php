@@ -78,6 +78,10 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
 
+        $this->is->set_SERVER('SERVER_NAME',"0.0.0.0");
+        $this->assertTrue($this->is->localhost());
+        $this->assertFalse($this->is->not()->localhost());
+
         $this->is->set_SERVER('SERVER_NAME',"localhost");
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
@@ -279,5 +283,99 @@ class IsTest extends PHPUnit_Framework_TestCase
             'Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12H143 Safari/600.1.4');
         $this->assertFalse($this->is->tablet());
         $this->assertTrue($this->is->not()->tablet());
+    }
+
+    public function testIE()
+    {
+        // IE8
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/4.0 (compatible; GoogleToolbar 5.0.2124.2070; Windows 6.0; MSIE 8.0.6001.18241)');
+
+        $this->assertTrue($this->is->ie());
+        $this->assertTrue($this->is->ie(8));
+        $this->assertFalse($this->is->not()->ie(8));
+
+        // IE9
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)');
+
+        $this->assertTrue($this->is->ie());
+        $this->assertFalse($this->is->not()->ie());
+        $this->assertFalse($this->is->ie(8));
+        $this->assertTrue($this->is->ie(9));
+
+        // Not IE
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36');
+
+        $this->assertFalse($this->is->ie());
+        $this->assertTrue($this->is->not()->ie());
+    }
+
+    public function testChrome()
+    {
+        // Chrome
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36');
+
+        $this->assertTrue($this->is->chrome());
+        $this->assertFalse($this->is->not()->chrome());
+
+        // Not Chrome
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->chrome());
+        $this->assertTrue($this->is->not()->chrome());
+    }
+
+    public function testOpera()
+    {
+        // Opera
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; ja) Presto/2.10.289 Version/12.00');
+
+        $this->assertTrue($this->is->opera());
+        $this->assertFalse($this->is->not()->opera());
+
+        // Not Opera
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->opera());
+        $this->assertTrue($this->is->not()->opera());
+
+    }
+
+    public function testFirefox()
+    {
+        // Firefox
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0');
+
+        $this->assertTrue($this->is->firefox());
+        $this->assertFalse($this->is->not()->firefox());
+
+        // Not Firefox
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->firefox());
+        $this->assertTrue($this->is->not()->firefox());
+    }
+
+    public function testSafari()
+    {
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A');
+
+        $this->assertTrue($this->is->safari());
+        $this->assertFalse($this->is->not()->safari());
+
+        $this->is->set_SERVER('HTTP_USER_AGENT',
+            'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
+
+        $this->assertFalse($this->is->safari());
+        $this->assertTrue($this->is->not()->safari());
     }
 }
