@@ -227,6 +227,10 @@ class Is
         return $this->_return_result($this->_check_browser("Android"));
     }
 
+    public function phone()
+    {
+        return $this->mobile();
+    }
 
     /**
      * @return bool
