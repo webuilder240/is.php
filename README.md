@@ -301,4 +301,17 @@ $is->request_delete();
 $is->not()->request_delete(); 
 // true if current request is not DELETE request
 
+
+# is->http_status_code(uri:string,http_code:int)
+
+``` php
+
+$is = new Is\Is();
+
+$is->http_status_code('http://google.com',302); 
+// true if http://google.com is responsed http_status_code 302
+
+$is->not()->http_status_code('http://google.com',500); 
+// true if http://google.com is not responsed http_status_code 302
+
 ```

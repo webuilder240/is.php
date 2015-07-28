@@ -381,7 +381,7 @@ class IsTest extends PHPUnit_Framework_TestCase
 
     public function testRemoteStatusCode()
     {
-        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/200',200));
+        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/200','200'));
         $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/201',201));
         $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/400',400));
         $this->assertTrue($this->is->not()->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/404',400));

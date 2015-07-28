@@ -590,17 +590,20 @@ class Is
     }
 
     /**
+     *
+     * URLが取得できない場合はfile_get_contentsにて普通に例外を投げます。
+     *
      * @param $uri
      * @param $http_status_code
      * @return bool
      */
     public function http_status_code($uri,$http_status_code)
     {
-        $context = stream_context_create(array(
-            'http' => array('ignore_errors' => true)
-        ));
+        $context = stream_context_create([
+            'http' => ['ignore_errors' => true]
+        ]);
 
-        file_get_contents($uri, false, $context);
+        file_get_contents($uri,null,$context,0,1);
         preg_match('/HTTP\/1\.[0|1|x] ([0-9]{3})/', $http_response_header[0], $matches);
         $status_code = $matches[1];
 
