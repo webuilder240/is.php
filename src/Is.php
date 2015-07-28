@@ -588,4 +588,27 @@ class Is
         }
         return $this->_return_result(false);
     }
+
+    /**
+     * @param $uri
+     * @param $http_status_code
+     * @return bool
+     */
+    public function http_status_code($uri,$http_status_code)
+    {
+        $context = stream_context_create(array(
+            'http' => array('ignore_errors' => true)
+        ));
+
+        file_get_contents($uri, false, $context);
+        preg_match('/HTTP\/1\.[0|1|x] ([0-9]{3})/', $http_response_header[0], $matches);
+        $status_code = $matches[1];
+
+        if ($status_code == $http_status_code){
+            return $this->_return_result(true);
+        }
+
+        return $this->_return_result(false);
+    }
+
 }
