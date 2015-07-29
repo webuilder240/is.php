@@ -1,9 +1,8 @@
 <?php
 namespace Is\Test;
 
-use PHPUnit_Framework_TestCase;
 
-class IsTest extends PHPUnit_Framework_TestCase
+class IsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Is\Is
@@ -401,6 +400,19 @@ class IsTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($this->is->same_type(1,'1'));
 		$this->assertFalse($this->is->same_type(1,1.0));
 		$this->assertTrue($this->is->not()->same_type('true',true));
+	}
+
+	public function testSameClass()
+	{
+		require_once 'testClass.php';
+		$test = new \testClass\testClass1();
+		$test2 = new \testClass\testClass1();
+		$test3 = new \testClass\sampleClass1();
+		$test4 = new \testClass\sampleClass2();
+		$this->assertTrue($this->is->same_class($test,$test2));
+		$this->assertFalse($this->is->same_class($test,$test3));
+		$this->assertFalse($this->is->not()->same_class($test,$test2));
+		$this->assertFalse($this->is->same_class($test3,$test4));
 	}
 
 }

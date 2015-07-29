@@ -588,7 +588,7 @@ class Is
         return $this->_return_result(false);
     }
 
-	public function str_include($str,$sub_str)
+	public function str_include($str, $sub_str)
 	{
 		return $this->_return_result(
 			strpos($str,$sub_str) !== false
@@ -599,6 +599,13 @@ class Is
 	{
 		return $this->_return_result(
 			gettype($x) === gettype($y)
+		);
+	}
+
+	public function same_class($x,$y)
+	{
+		return $this->_return_result(
+			get_class($x) === get_class($y)
 		);
 	}
 }
