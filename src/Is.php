@@ -618,4 +618,11 @@ class Is
         return $this->_return_result(false);
     }
 
+	public function str_include($str,$sub_str)
+	{
+		return $this->_return_result(
+			strpos($str,$sub_str) !== false
+		);
+	}
+
 }

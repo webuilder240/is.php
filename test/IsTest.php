@@ -388,4 +388,11 @@ class IsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/501',500));
     }
 
+	public function testStrInclude()
+	{
+		$this->assertTrue($this->is->str_include('nick','n'));
+		$this->assertFalse($this->is->not()->str_include('nick','n'));
+		$this->assertFalse($this->is->str_include('takuya','nishi'));
+	}
+
 }
