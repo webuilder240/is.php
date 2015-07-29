@@ -395,4 +395,12 @@ class IsTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($this->is->str_include('takuya','nishi'));
 	}
 
+	public function testSameType()
+	{
+		$this->assertTrue($this->is->same_type('1','1'));
+		$this->assertFalse($this->is->same_type(1,'1'));
+		$this->assertFalse($this->is->same_type(1,1.0));
+		$this->assertTrue($this->is->not()->same_type('true',true));
+	}
+
 }

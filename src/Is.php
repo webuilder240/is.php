@@ -488,36 +488,6 @@ class Is
     }
 
     /**
-     * phpunitでテストを実行しているか
-     * @return bool
-     */
-    public function run_unit()
-    {
-        if (isset($this->_SERVER['argv'])) {
-            $argv = $this->_SERVER['argv'][0];
-            if (strpos($argv, 'phpunit') !== false) {
-                return $this->_return_result(true);
-            }
-        }
-        return $this->_return_result(false);
-    }
-
-    /**
-     * phpspecでテストを実行しているか
-     * @return bool
-     */
-    public function run_spec()
-    {
-        if (isset($this->_SERVER['argv'])) {
-            $argv = $this->_SERVER['argv'][0];
-            if (strpos($argv, 'phpspec') !== false) {
-                return $this->_return_result(true);
-            }
-        }
-        return $this->_return_result(false);
-    }
-
-    /**
      * @todo filter_varで簡易的に実装しているが、日本のよくわからないメールアドレスについては対応してないので、そのうち頑張る。
      * @param $mail
      * @return bool
@@ -625,4 +595,10 @@ class Is
 		);
 	}
 
+	public function same_type($x, $y)
+	{
+		return $this->_return_result(
+			gettype($x) === gettype($y)
+		);
+	}
 }
