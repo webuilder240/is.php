@@ -588,6 +588,11 @@ class Is
         return $this->_return_result(false);
     }
 
+    /**
+     * @param $str
+     * @param $sub_str
+     * @return bool
+     */
 	public function str_include($str, $sub_str)
 	{
 		return $this->_return_result(
@@ -595,6 +600,28 @@ class Is
 		);
 	}
 
+    /**
+     * @param $str
+     * @param $sub_str
+     * @return bool
+     */
+    public function start_width($str, $sub_str)
+    {
+        return $this->_return_result(
+            strpos($str, $sub_str) === 0
+        );
+    }
+
+    public function end_width($str, $sub_str)
+    {
+
+    }
+
+    /**
+     * @param $x
+     * @param $y
+     * @return bool
+     */
 	public function same_type($x, $y)
 	{
 		return $this->_return_result(
@@ -602,10 +629,28 @@ class Is
 		);
 	}
 
+    /**
+     * @param $x
+     * @param $y
+     * @return bool
+     */
 	public function same_class($x,$y)
 	{
 		return $this->_return_result(
 			get_class($x) === get_class($y)
 		);
 	}
+
+    /**
+     * @param $check_num
+     * @param $min
+     * @param $max
+     * @return bool
+     */
+    public function is_range($check_num,$min,$max)
+    {
+        return $this->_return_result(
+            ($check_num >= $min) && ($check_num <= $max)
+        );
+    }
 }
