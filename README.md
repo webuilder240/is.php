@@ -316,3 +316,40 @@ $is->not()->http_status_code('http://google.com',500);
 // true if http://google.com is not responsed http_status_code 500
 
 ```
+
+# TypeCheck
+
+## is->same_type(val:any,val:any)
+
+``` php
+
+$is = new Is\Is();
+
+$is->same_type(1,2);
+// true 
+
+$is->same_type('1',2);
+// false
+
+$is->not()->same_type(1,2);
+
+```
+
+# String Check
+
+## is->str_include(str:string,search_word:string)
+
+``` php
+
+$is = new Is\Is();
+
+$is->str_include('nick','n');
+// true 
+
+$is->str_include('test','text);
+// false
+
+$is->not()->str_include('test','text');
+// true
+
+```
