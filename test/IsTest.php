@@ -39,13 +39,13 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->not()->ssl());
 
         //emulated chrome set always set https : 1
-        $this->is->set_SERVER('HTTPS','1');
+        $this->is->set_SERVER('HTTPS', '1');
         $this->assertFalse($this->is->ssl());
         $this->assertTrue($this->is->not()->ssl());
 
         // emulated ssl
-        $this->is->set_SERVER('HTTPS','on');
-        $this->is->set_SERVER('HTTP_HTTPS','1');
+        $this->is->set_SERVER('HTTPS', 'on');
+        $this->is->set_SERVER('HTTP_HTTPS', '1');
         $this->assertTrue($this->is->ssl());
         $this->assertFalse($this->is->not()->ssl());
 
@@ -56,7 +56,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->apache());
         $this->assertTrue($this->is->not()->apache());
 
-        $this->is->set_SERVER('SERVER_SOFTWARE','Apache Version: 2.2.10 (Unix)');
+        $this->is->set_SERVER('SERVER_SOFTWARE', 'Apache Version: 2.2.10 (Unix)');
         $this->assertTrue($this->is->apache());
         $this->assertFalse($this->is->not()->apache());
     }
@@ -66,81 +66,81 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->build_in_server());
         $this->assertTrue($this->is->not()->build_in_server());
 
-        $this->is->set_SERVER('SERVER_SOFTWARE','PHP 5.6.11 Development Server');
+        $this->is->set_SERVER('SERVER_SOFTWARE', 'PHP 5.6.11 Development Server');
         $this->assertTrue($this->is->build_in_server());
         $this->assertFalse($this->is->not()->build_in_server());
     }
 
     public function testLocalhost()
     {
-        $this->is->set_SERVER('SERVER_NAME',"127.0.0.1");
+        $this->is->set_SERVER('SERVER_NAME', "127.0.0.1");
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
 
-        $this->is->set_SERVER('SERVER_NAME',"0.0.0.0");
+        $this->is->set_SERVER('SERVER_NAME', "0.0.0.0");
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
 
-        $this->is->set_SERVER('SERVER_NAME',"localhost");
+        $this->is->set_SERVER('SERVER_NAME', "localhost");
         $this->assertTrue($this->is->localhost());
         $this->assertFalse($this->is->not()->localhost());
 
-        $this->is->set_SERVER('SERVER_NAME',"https://webuilder240.github.io/");
+        $this->is->set_SERVER('SERVER_NAME', "https://webuilder240.github.io/");
         $this->assertFalse($this->is->localhost());
         $this->assertTrue($this->is->not()->localhost());
     }
 
     public function testRequestGET()
     {
-        $this->is->set_SERVER('REQUEST_METHOD','GET');
+        $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertTrue($this->is->request_get());
         $this->assertFalse($this->is->not()->request_get());
 
-        $this->is->set_SERVER('REQUEST_METHOD','POST');
+        $this->is->set_SERVER('REQUEST_METHOD', 'POST');
         $this->assertFalse($this->is->request_get());
         $this->assertTrue($this->is->not()->request_get());
     }
 
     public function testRequestPOST()
     {
-        $this->is->set_SERVER('REQUEST_METHOD','POST');
+        $this->is->set_SERVER('REQUEST_METHOD', 'POST');
         $this->assertTrue($this->is->request_post());
         $this->assertFalse($this->is->not()->request_post());
 
-        $this->is->set_SERVER('REQUEST_METHOD','GET');
+        $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertFalse($this->is->request_post());
         $this->assertTrue($this->is->not()->request_post());
     }
 
     public function testRequestPUT()
     {
-        $this->is->set_SERVER('REQUEST_METHOD','PUT');
+        $this->is->set_SERVER('REQUEST_METHOD', 'PUT');
         $this->assertTrue($this->is->request_put());
         $this->assertFalse($this->is->not()->request_put());
 
-        $this->is->set_SERVER('REQUEST_METHOD','POST');
+        $this->is->set_SERVER('REQUEST_METHOD', 'POST');
         $this->assertFalse($this->is->request_put());
         $this->assertTrue($this->is->not()->request_put());
     }
 
     public function testRequestPATCH()
     {
-        $this->is->set_SERVER('REQUEST_METHOD','PATCH');
+        $this->is->set_SERVER('REQUEST_METHOD', 'PATCH');
         $this->assertTrue($this->is->request_patch());
         $this->assertFalse($this->is->not()->request_patch());
 
-        $this->is->set_SERVER('REQUEST_METHOD','GET');
+        $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertFalse($this->is->request_patch());
         $this->assertTrue($this->is->not()->request_patch());
     }
 
     public function testRequestDELETE()
     {
-        $this->is->set_SERVER('REQUEST_METHOD','DELETE');
+        $this->is->set_SERVER('REQUEST_METHOD', 'DELETE');
         $this->assertTrue($this->is->request_delete());
         $this->assertFalse($this->is->not()->request_delete());
 
-        $this->is->set_SERVER('REQUEST_METHOD','GET');
+        $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertFalse($this->is->request_delete());
         $this->assertTrue($this->is->not()->request_delete());
     }
@@ -380,61 +380,61 @@ class IsTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoteStatusCode()
     {
-        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/200','200'));
-        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/201',201));
-        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/400',400));
-        $this->assertTrue($this->is->not()->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/404',400));
-        $this->assertFalse($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/501',500));
+        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/200', '200'));
+        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/201', 201));
+        $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/400', 400));
+        $this->assertTrue($this->is->not()->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/404', 400));
+        $this->assertFalse($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/501', 500));
     }
 
-	public function testStrInclude()
-	{
-		$this->assertTrue($this->is->str_include('nick','n'));
-		$this->assertFalse($this->is->not()->str_include('nick','n'));
-		$this->assertFalse($this->is->str_include('takuya','nishi'));
-	}
+    public function testStrInclude()
+    {
+        $this->assertTrue($this->is->str_include('nick', 'n'));
+        $this->assertFalse($this->is->not()->str_include('nick', 'n'));
+        $this->assertFalse($this->is->str_include('takuya', 'nishi'));
+    }
 
-	public function testSameType()
-	{
-		$this->assertTrue($this->is->same_type('1','1'));
-		$this->assertFalse($this->is->same_type(1,'1'));
-		$this->assertFalse($this->is->same_type(1,1.0));
-		$this->assertTrue($this->is->not()->same_type('true',true));
-	}
+    public function testSameType()
+    {
+        $this->assertTrue($this->is->same_type('1', '1'));
+        $this->assertFalse($this->is->same_type(1, '1'));
+        $this->assertFalse($this->is->same_type(1, 1.0));
+        $this->assertTrue($this->is->not()->same_type('true', true));
+    }
 
-	public function testSameClass()
-	{
-		require_once 'testClass.php';
-		$test = new \testClass\testClass1();
-		$test2 = new \testClass\testClass1();
-		$test3 = new \testClass\sampleClass1();
-		$test4 = new \testClass\sampleClass2();
-		$this->assertTrue($this->is->same_class($test,$test2));
-		$this->assertFalse($this->is->same_class($test,$test3));
-		$this->assertFalse($this->is->not()->same_class($test,$test2));
-		$this->assertFalse($this->is->same_class($test3,$test4));
-	}
+    public function testSameClass()
+    {
+        require_once 'testClass.php';
+        $test = new \testClass\testClass1();
+        $test2 = new \testClass\testClass1();
+        $test3 = new \testClass\sampleClass1();
+        $test4 = new \testClass\sampleClass2();
+        $this->assertTrue($this->is->same_class($test, $test2));
+        $this->assertFalse($this->is->same_class($test, $test3));
+        $this->assertFalse($this->is->not()->same_class($test, $test2));
+        $this->assertFalse($this->is->same_class($test3, $test4));
+    }
 
     public function testStartWidth()
     {
-        $this->assertTrue($this->is->start_width('text','tex'));
-        $this->assertFalse($this->is->start_width('abc','bc'));
-        $this->assertTrue($this->is->not()->start_width('abc','bc'));
+        $this->assertTrue($this->is->start_width('text', 'tex'));
+        $this->assertFalse($this->is->start_width('abc', 'bc'));
+        $this->assertTrue($this->is->not()->start_width('abc', 'bc'));
     }
 
     public function testEndWidth()
     {
-        $this->assertTrue($this->is->end_width('test','est'));
-        $this->assertFalse($this->is->end_width('test','tes'));
-        $this->assertTrue($this->is->not()->end_width('test','tes'));
+        $this->assertTrue($this->is->end_width('test', 'est'));
+        $this->assertFalse($this->is->end_width('test', 'tes'));
+        $this->assertTrue($this->is->not()->end_width('test', 'tes'));
     }
 
     public function testRenge()
     {
-        $this->assertTrue($this->is->range(100,1,100));
-        $this->assertFalse($this->is->range(1000,1,100));
-        $this->assertFalse($this->is->range(1,10,100));
-        $this->assertTrue($this->is->not()->range(1,10,100));
+        $this->assertTrue($this->is->range(100, 1, 100));
+        $this->assertFalse($this->is->range(1000, 1, 100));
+        $this->assertFalse($this->is->range(1, 10, 100));
+        $this->assertTrue($this->is->not()->range(1, 10, 100));
     }
 
 }

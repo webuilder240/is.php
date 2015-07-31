@@ -70,6 +70,7 @@ class Is
     {
         if ($this->not_flg) {
             $this->not_flg = false;
+
             return !$pre_result;
         }
 
@@ -85,6 +86,7 @@ class Is
         if (php_sapi_name() === $check_string) {
             return $this->_return_result(true);
         }
+
         return $this->_return_result(false);
     }
 
@@ -121,6 +123,7 @@ class Is
                 return true;
             }
         }
+
         return false;
     }
 
@@ -134,6 +137,7 @@ class Is
                 return $this->_return_result(true);
             }
         }
+
         return $this->_return_result(false);
     }
 
@@ -216,6 +220,7 @@ class Is
         if ($this->_check_browser("iPhone") || $this->_check_browser("iPad") || $this->_check_browser("iPod")) {
             return $this->_return_result(true);
         }
+
         return $this->_return_result(false);
     }
 
@@ -340,6 +345,7 @@ class Is
         if (!$this->_check_browser("Chrome") && $this->_check_browser("Safari")) {
             return $this->_return_result(true);
         }
+
         return $this->_return_result(false);
     }
 
@@ -370,6 +376,7 @@ class Is
                 return true;
             }
         }
+
         return false;
     }
 
@@ -384,6 +391,7 @@ class Is
             if ($this->_check_browser("MSIE") && strpos($this->_SERVER['HTTP_USER_AGENT'], $version) !== false) {
                 return $this->_return_result(true);
             }
+
             return $this->_return_result(false);
         } else {
             return $this->_return_result($this->_check_browser("MSIE"));
@@ -415,6 +423,7 @@ class Is
                 return $this->_return_result(true);
             }
         }
+
         return $this->_return_result(false);
     }
 
@@ -444,6 +453,7 @@ class Is
         if ($this->_SERVER['REQUEST_METHOD'] === $check_type) {
             return true;
         }
+
         return false;
     }
 
@@ -497,6 +507,7 @@ class Is
         if (filter_var($mail, FILTER_VALIDATE_EMAIL) !== false) {
             return $this->_return_result(true);
         }
+
         return $this->_return_result(false);
     }
 
@@ -509,6 +520,7 @@ class Is
         if (filter_var($url, FILTER_VALIDATE_URL) !== false) {
             return $this->_return_result(true);
         }
+
         return $this->_return_result(false);
     }
 
@@ -557,9 +569,11 @@ class Is
      */
     public function creditcard($num)
     {
-        if (preg_match("/^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/", $num)) {
+        if (preg_match("/^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/",
+            $num)) {
             return $this->_return_result(true);
         }
+
         return $this->_return_result(false);
     }
 
@@ -571,17 +585,17 @@ class Is
      * @param $http_status_code
      * @return bool
      */
-    public function http_status_code($uri,$http_status_code)
+    public function http_status_code($uri, $http_status_code)
     {
         $context = stream_context_create([
             'http' => ['ignore_errors' => true]
         ]);
 
-        file_get_contents($uri,null,$context,0,1);
+        file_get_contents($uri, null, $context, 0, 1);
         preg_match('/HTTP\/1\.[0|1|x] ([0-9]{3})/', $http_response_header[0], $matches);
         $status_code = $matches[1];
 
-        if ($status_code == $http_status_code){
+        if ($status_code == $http_status_code) {
             return $this->_return_result(true);
         }
 
@@ -593,12 +607,12 @@ class Is
      * @param $sub_str
      * @return bool
      */
-	public function str_include($str, $sub_str)
-	{
-		return $this->_return_result(
-			strpos($str,$sub_str) !== false
-		);
-	}
+    public function str_include($str, $sub_str)
+    {
+        return $this->_return_result(
+            strpos($str, $sub_str) !== false
+        );
+    }
 
     /**
      * @param $str
@@ -621,8 +635,9 @@ class Is
     public function end_width($str, $sub_str)
     {
         $length = mb_strlen($str) - mb_strlen($sub_str);
+
         return $this->_return_result(
-            strpos($str,$sub_str) === $length
+            strpos($str, $sub_str) === $length
         );
     }
 
@@ -631,24 +646,24 @@ class Is
      * @param $y
      * @return bool
      */
-	public function same_type($x, $y)
-	{
-		return $this->_return_result(
-			gettype($x) === gettype($y)
-		);
-	}
+    public function same_type($x, $y)
+    {
+        return $this->_return_result(
+            gettype($x) === gettype($y)
+        );
+    }
 
     /**
      * @param $x
      * @param $y
      * @return bool
      */
-	public function same_class($x,$y)
-	{
-		return $this->_return_result(
-			get_class($x) === get_class($y)
-		);
-	}
+    public function same_class($x, $y)
+    {
+        return $this->_return_result(
+            get_class($x) === get_class($y)
+        );
+    }
 
     /**
      * @param $check_num
@@ -656,7 +671,7 @@ class Is
      * @param $max
      * @return bool
      */
-    public function range($check_num,$min,$max)
+    public function range($check_num, $min, $max)
     {
         return $this->_return_result(
             ($check_num >= $min) && ($check_num <= $max)
