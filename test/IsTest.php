@@ -415,4 +415,26 @@ class IsTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse($this->is->same_class($test3,$test4));
 	}
 
+    public function testStartWidth()
+    {
+        $this->assertTrue($this->is->start_width('text','tex'));
+        $this->assertFalse($this->is->start_width('abc','bc'));
+        $this->assertTrue($this->is->not()->start_width('abc','bc'));
+    }
+
+    public function testEndWidth()
+    {
+        $this->assertTrue($this->is->end_width('test','est'));
+        $this->assertFalse($this->is->end_width('test','tes'));
+        $this->assertTrue($this->is->not()->end_width('test','tes'));
+    }
+
+    public function testRenge()
+    {
+        $this->assertTrue($this->is->range(100,1,100));
+        $this->assertFalse($this->is->range(1000,1,100));
+        $this->assertFalse($this->is->range(1,10,100));
+        $this->assertTrue($this->is->not()->range(1,10,100));
+    }
+
 }

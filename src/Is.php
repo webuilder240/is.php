@@ -612,9 +612,18 @@ class Is
         );
     }
 
+
+    /**
+     * @param $str
+     * @param $sub_str
+     * @return bool
+     */
     public function end_width($str, $sub_str)
     {
-
+        $length = mb_strlen($str) - mb_strlen($sub_str);
+        return $this->_return_result(
+            strpos($str,$sub_str) === $length
+        );
     }
 
     /**
@@ -647,7 +656,7 @@ class Is
      * @param $max
      * @return bool
      */
-    public function is_range($check_num,$min,$max)
+    public function range($check_num,$min,$max)
     {
         return $this->_return_result(
             ($check_num >= $min) && ($check_num <= $max)
