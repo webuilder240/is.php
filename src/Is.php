@@ -15,11 +15,7 @@ class Is
      */
     private static function _check_sapi_name($check_string)
     {
-        if (php_sapi_name() === $check_string) {
-            return true;
-        }
-
-        return false;
+        return php_sapi_name() === $check_string;
     }
 
     /**
@@ -49,9 +45,7 @@ class Is
     public static function ssl()
     {
         if (isset($_SERVER['HTTPS']) && isset($_SERVER['HTTP_HTTPS'])) {
-            if ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTP_HTTPS'] === '1') {
-                return true;
-            }
+            return $_SERVER['HTTPS'] === 'on' || $_SERVER['HTTP_HTTPS'] === '1';
         }
 
         return false;
@@ -84,7 +78,7 @@ class Is
         }
 
         if ($host === "localhost" || $host === '127.0.0.1' || $host === '0.0.0.0') {
-            return self::localhost();
+            return true;
         }
 
         if ($_SERVER['SERVER_NAME'] === $host) {
@@ -133,11 +127,7 @@ class Is
      */
     public static function ios()
     {
-        if (self::_check_browser("iPhone") || self::_check_browser("iPad") || self::_check_browser("iPod")) {
-            return true;
-        }
-
-        return false;
+        return self::_check_browser("iPhone") || self::_check_browser("iPad") || self::_check_browser("iPod");
     }
 
     /**
@@ -172,6 +162,7 @@ class Is
             } else {
                 $result = self::_check_mobile_agent($mobile);
             }
+
             if ($result) {
                 return true;
             }
@@ -198,34 +189,22 @@ class Is
         foreach ($tablet_lists as $tablet) {
 
             if ($tablet === 'android') {
-                if (strpos($ua, 'android') !== false && strpos($ua, 'mobile') === false) {
-                    $result = true;
-                } else {
-                    $result = false;
+                if (self::str_include($ua, 'android') && !self::str_include($ua, 'mobile')) {
+                    return true;
                 }
             } elseif ($tablet === 'firefox') {
-                if (strpos($ua, 'firefox') !== false && strpos($ua, 'tablet') !== false) {
-                    $result = true;
-                } else {
-                    $result = false;
+                if (self::str_include($ua, 'firefox') && self::str_include($ua, 'tablet')) {
+                    return true;
                 }
             } elseif ($tablet === 'windows') {
-                if (strpos($ua, 'windows') !== false && strpos($ua, 'touch') !== false) {
-                    $result = true;
-                } else {
-                    $result = false;
+                if (self::str_include($ua, 'windows') && self::str_include($ua, 'touch')) {
+                    return true;
                 }
             } elseif ($tablet === 'kindle') {
-                if (strpos($ua, 'kindle') !== false || strpos($ua, 'silk') !== false) {
-                    $result = true;
-                } else {
-                    $result = false;
+                if (self::str_include($ua, 'kindle') || self::str_include($ua, 'silk')) {
+                    return true;
                 }
-            } else {
-                $result = self::_check_mobile_agent($tablet);
-            }
-
-            if ($result) {
+            } elseif(self::_check_mobile_agent($tablet)) {
                 return true;
             }
         }
@@ -240,16 +219,10 @@ class Is
     {
         $ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
         if ($key) {
-            if (strpos($ua, $params) !== false && strpos($ua, $key) !== false) {
-                return true;
-            }
+            return self::str_include($ua, $params) && self::str_include($ua, $key);
         } else {
-            if (strpos($ua, $params) !== false) {
-                return true;
-            }
+            return self::str_include($ua, $params);
         }
-
-        return false;
     }
 
     /**
@@ -258,11 +231,7 @@ class Is
     public static function safari()
     {
         //最初にChromeが存在しないかチェックする
-        if (!self::_check_browser("Chrome") && self::_check_browser("Safari")) {
-            return true;
-        }
-
-        return false;
+        return !self::_check_browser("Chrome") && self::_check_browser("Safari");
     }
 
     /**
@@ -302,10 +271,7 @@ class Is
     {
         if ($version) {
             $version = strval($version) . '.0';
-            if (self::_check_browser("MSIE") && self::str_include($_SERVER['HTTP_USER_AGENT'], $version)) {
-                return true;
-            }
-            return false;
+            return self::_check_browser("MSIE") && self::str_include($_SERVER['HTTP_USER_AGENT'], $version);
         } else {
             return self::_check_browser("MSIE");
         }
@@ -413,11 +379,7 @@ class Is
      */
     public static function email($mail)
     {
-        if (filter_var($mail, FILTER_VALIDATE_EMAIL) !== false) {
-            return true;
-        }
-
-        return false;
+        return filter_var($mail, FILTER_VALIDATE_EMAIL) !== false;
     }
 
     /**
@@ -426,11 +388,7 @@ class Is
      */
     public static function url($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL) !== false) {
-            return true;
-        }
-
-        return false;
+        return filter_var($url, FILTER_VALIDATE_URL) !== false;
     }
 
     /**
@@ -439,11 +397,7 @@ class Is
      */
     public static function ip($ip)
     {
-        if (filter_var($ip, FILTER_VALIDATE_IP) !== false) {
-            return true;
-        }
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP) !== false;
     }
 
     /**
@@ -452,11 +406,7 @@ class Is
      */
     public static function ipv4($ip)
     {
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false) {
-            return true;
-        }
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
     }
 
     /**
@@ -465,11 +415,7 @@ class Is
      */
     public static function ipv6($ip)
     {
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
-            return true;
-        }
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
     }
 
     /**
@@ -504,11 +450,7 @@ class Is
         preg_match('/HTTP\/1\.[0|1|x] ([0-9]{3})/', $http_response_header[0], $matches);
         $status_code = $matches[1];
 
-        if ($status_code == $http_status_code) {
-            return true;
-        }
-
-        return false;
+        return $status_code == $http_status_code;
     }
 
     /**
