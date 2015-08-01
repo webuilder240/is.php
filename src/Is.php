@@ -7,6 +7,8 @@ namespace Is;
  */
 class Is
 {
+    const VERSION = '0.0.4';
+
     /**
      * @param $check_string
      * @return bool
