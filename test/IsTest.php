@@ -1,7 +1,7 @@
 <?php
 namespace Is\Test;
 
-use \Is\Is;
+use Is\Is;
 
 class IsTest extends \PHPUnit_Framework_TestCase
 {
