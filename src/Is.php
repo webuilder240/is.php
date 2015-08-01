@@ -7,7 +7,7 @@ namespace Is;
  */
 class Is
 {
-    const VERSION = '0.0.4';
+    const VERSION = '0.0.5';
 
     /**
      * @param $check_string
@@ -33,7 +33,7 @@ class Is
     private static function _check_server_software($soft_name)
     {
         if (isset($_SERVER['SERVER_SOFTWARE'])) {
-            return self::str_include($_SERVER['SERVER_SOFTWARE'],$soft_name);
+            return self::str_include($_SERVER['SERVER_SOFTWARE'], $soft_name);
         }
 
         return false;
@@ -177,36 +177,19 @@ class Is
     public static function tablet()
     {
         $ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
-        $tablet_lists = [
-            'ipad',
-            'android',
-            'kindle',
-            'firefox',
-            'playbook',
-            'windows',
-        ];
 
-        foreach ($tablet_lists as $tablet) {
-
-            if ($tablet === 'android') {
-                if (self::str_include($ua, 'android') && !self::str_include($ua, 'mobile')) {
-                    return true;
-                }
-            } elseif ($tablet === 'firefox') {
-                if (self::str_include($ua, 'firefox') && self::str_include($ua, 'tablet')) {
-                    return true;
-                }
-            } elseif ($tablet === 'windows') {
-                if (self::str_include($ua, 'windows') && self::str_include($ua, 'touch')) {
-                    return true;
-                }
-            } elseif ($tablet === 'kindle') {
-                if (self::str_include($ua, 'kindle') || self::str_include($ua, 'silk')) {
-                    return true;
-                }
-            } elseif(self::_check_mobile_agent($tablet)) {
-                return true;
-            }
+        if (self::str_include($ua, 'android') && !self::str_include($ua, 'mobile')) {
+            return true;
+        } elseif (self::str_include($ua, 'firefox') && self::str_include($ua, 'tablet')) {
+            return true;
+        } elseif (self::str_include($ua, 'windows') && self::str_include($ua, 'touch')) {
+            return true;
+        } elseif (self::str_include($ua, 'kindle') || self::str_include($ua, 'silk')) {
+            return true;
+        } elseif (self::str_include($ua, 'ipad')) {
+            return true;
+        } elseif (self::str_include($ua, 'playbook')) {
+            return true;
         }
 
         return false;
@@ -271,6 +254,7 @@ class Is
     {
         if ($version) {
             $version = strval($version) . '.0';
+
             return self::_check_browser("MSIE") && self::str_include($_SERVER['HTTP_USER_AGENT'], $version);
         } else {
             return self::_check_browser("MSIE");
