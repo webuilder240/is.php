@@ -17,7 +17,11 @@ class Is
      * @var array
      */
     private $_SERVER;
-    private $same_name;
+
+    /**
+     * @var string
+     */
+    private $php_sapi_name;
 
     /**
      * set $_SERVER,$php_same_name
@@ -25,7 +29,7 @@ class Is
     public function __construct()
     {
         $this->_SERVER = $_SERVER;
-        $this->same_name = php_sapi_name();
+        $this->php_sapi_name = php_sapi_name();
     }
 
     /**
@@ -47,19 +51,22 @@ class Is
      *
      * for unit test
      */
-    public function set_php_same_name($value)
+    public function set_php_sapi_name($value)
     {
-        $this->php_same_name = $value;
+        $this->php_sapi_name = $value;
     }
 
     /**
+     * @param $name
      * @return $this
      */
-    public function not()
+    public function __get($name)
     {
-        $this->not_flg = true;
+        if ($name === 'not'){
+            $this->not_flg = true;
 
-        return $this;
+            return $this;
+        }
     }
 
     /**
@@ -97,20 +104,6 @@ class Is
     {
         return $this->_return_result($this->_check_server_software("Apache"));
     }
-
-    /**
-     * @return bool
-     */
-//    public function nginx()
-//    {
-//    }
-
-    /**
-     * @return bool
-     */
-//    public function iis()
-//    {
-//    }
 
     /**
      * @param $soft_name
