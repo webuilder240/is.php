@@ -23,7 +23,7 @@ $is = new Is\Is();
 $is->apache(); 
 // true if current run server is apache
 
-$is->not()->apache();
+$is->not->apache();
 // true if current run server is not apache
 
 ```
@@ -37,7 +37,7 @@ $is = new Is\Is();
 $is->build_in_server(); 
 // true if current run server is php build_in_server(cli-server)
 
-$is->not()->build_in_server();
+$is->not->build_in_server();
 // true if current run server is not php build_in_server(cli-server)
 
 ```
@@ -53,7 +53,7 @@ $is = new Is\Is();
 $is->ssl(); 
 // true if current run server protocol is 'ssl'
 
-$is->not()->ssl();
+$is->not->ssl();
 // true if current run server protocol is not 'ssl'
 
 ```
@@ -67,7 +67,7 @@ $is = new Is\Is();
 $is->localhost(); 
 // true if current run server ip is 'localhost' or 127.0.0.1
 
-$is->not()->localhost();
+$is->not->localhost();
 // true if current run server ip is not 'localhost' or 127.0.0.1
 
 ```
@@ -81,7 +81,7 @@ $is = new Is\Is();
 $is->host('www.google.com'); 
 // true if current run server host name is 'www.google.com'
 
-$is->not()->host('www.google.com');
+$is->not->host('www.google.com');
 // true if current run server host name is not 'www.google.com'
 
 ```
@@ -95,7 +95,7 @@ $is = new Is\Is();
 $is->host_ip('192.168.56.101'); 
 // true if current run server host ip address '192.168.56.101'
 
-$is->not()->host('192.168.56.101');
+$is->not->host('192.168.56.101');
 // true if current run server host ip address is not '192.168.56.101'
 
 ```
@@ -111,7 +111,7 @@ $is = new Is\Is();
 $is->chorme();
 // true if current browser is chrome 
 
-$is->not()->chorme();
+$is->not->chorme();
 // true if current browser is not chrome 
 
 ```
@@ -125,7 +125,7 @@ $is = new Is\Is();
 $is->firefox();
 // true if current browser is firefox 
 
-$is->not()->firefox();
+$is->not->firefox();
 // true if current browser is not firefox 
 
 ```
@@ -139,7 +139,7 @@ $is = new Is\Is();
 $is->safari();
 // true if current browser is safari
 
-$is->not()->safari();
+$is->not->safari();
 // true if current browser is not safari
 
 ```
@@ -153,7 +153,7 @@ $is = new Is\Is();
 $is->opera();
 // true if current browser is opera
 
-$is->not()->opera();
+$is->not->opera();
 // true if current browser is not opera
 
 ```
@@ -170,7 +170,7 @@ $is->ie();
 $is->ie(8);
 // true if current brower is ie version 8
 
-$is->not()->ie();
+$is->not->ie();
 // true if current browser is not ie
 
 ```
@@ -185,7 +185,7 @@ $is = new Is\Is();
 $is->ios(); 
 // true if current device has iOS
 
-$is->not()->ios(); 
+$is->not->ios(); 
 // true if current device has iOS
 
 ```
@@ -199,7 +199,7 @@ $is = new Is\Is();
 $is->android(); 
 // true if current device has Android OS
 
-$is->not()->android(); 
+$is->not->android(); 
 // true if current device has not Android OS
 ```
 
@@ -212,7 +212,7 @@ $is = new Is\Is();
 $is->mobile(); 
 // true if current device is mobile (phone)
 
-$is->not()->mobile(); 
+$is->not->mobile(); 
 // true if current device is not mobile (phone)
 
 ```
@@ -226,7 +226,7 @@ $is = new Is\Is();
 $is->tablet(); 
 // true if current device is tablet
 
-$is->not()->tablet(); 
+$is->not->tablet(); 
 // true if current device is not tablet
 
 ```
@@ -242,7 +242,7 @@ $is = new Is\Is();
 $is->request_get(); 
 // true if current request is GET request
 
-$is->not()->request_get(); 
+$is->not->request_get(); 
 // true if current request is not GET request
 
 ```
@@ -256,7 +256,7 @@ $is = new Is\Is();
 $is->request_post(); 
 // true if current request is POST request
 
-$is->not()->request_post(); 
+$is->not->request_post(); 
 // true if current request is not POST request
 
 ```
@@ -270,7 +270,7 @@ $is = new Is\Is();
 $is->request_put(); 
 // true if current request is PUT request
 
-$is->not()->request_put(); 
+$is->not->request_put(); 
 // true if current request is not PUT request
 
 ```
@@ -284,7 +284,7 @@ $is = new Is\Is();
 $is->request_patch(); 
 // true if current request is PATCH request
 
-$is->not()->request_patch(); 
+$is->not->request_patch(); 
 // true if current request is not PATCH request
 
 ```
@@ -298,7 +298,7 @@ $is = new Is\Is();
 $is->request_delete(); 
 // true if current request is DELETE request
 
-$is->not()->request_delete(); 
+$is->not->request_delete(); 
 // true if current request is not DELETE request
 
 ```
@@ -312,7 +312,7 @@ $is = new Is\Is();
 $is->http_status_code('http://google.com',302); 
 // true if http://google.com is responsed http_status_code 302
 
-$is->not()->http_status_code('http://google.com',500); 
+$is->not->http_status_code('http://google.com',500); 
 // true if http://google.com is not responsed http_status_code 500
 
 ```
@@ -331,7 +331,7 @@ $is->same_type(1,2);
 $is->same_type('1',2);
 // false
 
-$is->not()->same_type(1,2);
+$is->not->same_type(1,2);
 
 ```
 
@@ -349,7 +349,7 @@ $is->str_include('nick','n');
 $is->str_include('test','text);
 // false
 
-$is->not()->str_include('test','text');
+$is->not->str_include('test','text');
 // true
 
 ```

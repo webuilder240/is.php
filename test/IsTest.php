@@ -36,119 +36,119 @@ class IsTest extends \PHPUnit_Framework_TestCase
     public function testSsl()
     {
         $this->assertFalse($this->is->ssl());
-        $this->assertTrue($this->is->not()->ssl());
+        $this->assertTrue($this->is->not->ssl());
 
         //emulated chrome set always set https : 1
         $this->is->set_SERVER('HTTPS', '1');
         $this->assertFalse($this->is->ssl());
-        $this->assertTrue($this->is->not()->ssl());
+        $this->assertTrue($this->is->not->ssl());
 
         // emulated ssl
         $this->is->set_SERVER('HTTPS', 'on');
         $this->is->set_SERVER('HTTP_HTTPS', '1');
         $this->assertTrue($this->is->ssl());
-        $this->assertFalse($this->is->not()->ssl());
+        $this->assertFalse($this->is->not->ssl());
 
     }
 
     public function testApache()
     {
         $this->assertFalse($this->is->apache());
-        $this->assertTrue($this->is->not()->apache());
+        $this->assertTrue($this->is->not->apache());
 
         $this->is->set_SERVER('SERVER_SOFTWARE', 'Apache Version: 2.2.10 (Unix)');
         $this->assertTrue($this->is->apache());
-        $this->assertFalse($this->is->not()->apache());
+        $this->assertFalse($this->is->not->apache());
     }
 
     public function testBuildInServer()
     {
         $this->assertFalse($this->is->build_in_server());
-        $this->assertTrue($this->is->not()->build_in_server());
+        $this->assertTrue($this->is->not->build_in_server());
 
         $this->is->set_SERVER('SERVER_SOFTWARE', 'PHP 5.6.11 Development Server');
         $this->assertTrue($this->is->build_in_server());
-        $this->assertFalse($this->is->not()->build_in_server());
+        $this->assertFalse($this->is->not->build_in_server());
     }
 
     public function testLocalhost()
     {
         $this->is->set_SERVER('SERVER_NAME', "127.0.0.1");
         $this->assertTrue($this->is->localhost());
-        $this->assertFalse($this->is->not()->localhost());
+        $this->assertFalse($this->is->not->localhost());
 
         $this->is->set_SERVER('SERVER_NAME', "0.0.0.0");
         $this->assertTrue($this->is->localhost());
-        $this->assertFalse($this->is->not()->localhost());
+        $this->assertFalse($this->is->not->localhost());
 
         $this->is->set_SERVER('SERVER_NAME', "localhost");
         $this->assertTrue($this->is->localhost());
-        $this->assertFalse($this->is->not()->localhost());
+        $this->assertFalse($this->is->not->localhost());
 
         $this->is->set_SERVER('SERVER_NAME', "https://webuilder240.github.io/");
         $this->assertFalse($this->is->localhost());
-        $this->assertTrue($this->is->not()->localhost());
+        $this->assertTrue($this->is->not->localhost());
     }
 
     public function testRequestGET()
     {
         $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertTrue($this->is->request_get());
-        $this->assertFalse($this->is->not()->request_get());
+        $this->assertFalse($this->is->not->request_get());
 
         $this->is->set_SERVER('REQUEST_METHOD', 'POST');
         $this->assertFalse($this->is->request_get());
-        $this->assertTrue($this->is->not()->request_get());
+        $this->assertTrue($this->is->not->request_get());
     }
 
     public function testRequestPOST()
     {
         $this->is->set_SERVER('REQUEST_METHOD', 'POST');
         $this->assertTrue($this->is->request_post());
-        $this->assertFalse($this->is->not()->request_post());
+        $this->assertFalse($this->is->not->request_post());
 
         $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertFalse($this->is->request_post());
-        $this->assertTrue($this->is->not()->request_post());
+        $this->assertTrue($this->is->not->request_post());
     }
 
     public function testRequestPUT()
     {
         $this->is->set_SERVER('REQUEST_METHOD', 'PUT');
         $this->assertTrue($this->is->request_put());
-        $this->assertFalse($this->is->not()->request_put());
+        $this->assertFalse($this->is->not->request_put());
 
         $this->is->set_SERVER('REQUEST_METHOD', 'POST');
         $this->assertFalse($this->is->request_put());
-        $this->assertTrue($this->is->not()->request_put());
+        $this->assertTrue($this->is->not->request_put());
     }
 
     public function testRequestPATCH()
     {
         $this->is->set_SERVER('REQUEST_METHOD', 'PATCH');
         $this->assertTrue($this->is->request_patch());
-        $this->assertFalse($this->is->not()->request_patch());
+        $this->assertFalse($this->is->not->request_patch());
 
         $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertFalse($this->is->request_patch());
-        $this->assertTrue($this->is->not()->request_patch());
+        $this->assertTrue($this->is->not->request_patch());
     }
 
     public function testRequestDELETE()
     {
         $this->is->set_SERVER('REQUEST_METHOD', 'DELETE');
         $this->assertTrue($this->is->request_delete());
-        $this->assertFalse($this->is->not()->request_delete());
+        $this->assertFalse($this->is->not->request_delete());
 
         $this->is->set_SERVER('REQUEST_METHOD', 'GET');
         $this->assertFalse($this->is->request_delete());
-        $this->assertTrue($this->is->not()->request_delete());
+        $this->assertTrue($this->is->not->request_delete());
     }
 
     public function testEmail()
     {
         $this->assertTrue($this->is->email('littlecub240@gmail.com'));
-        $this->assertTrue($this->is->not()->email('littlecub240@com'));
+        $this->assertTrue($this->is->not->email('littlecub240@com'));
         $this->assertFalse($this->is->email('littlecub240@com'));
     }
 
@@ -156,8 +156,8 @@ class IsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->is->url('http://webuilder240.github.io'));
         $this->assertFalse($this->is->url('littlecub240@com'));
-        $this->assertTrue($this->is->not()->url('littlecub240@com'));
-        $this->assertFalse($this->is->not()->url('http://webuilder240.github.io'));
+        $this->assertTrue($this->is->not->url('littlecub240@com'));
+        $this->assertFalse($this->is->not->url('http://webuilder240.github.io'));
     }
 
     public function testIp()
@@ -166,7 +166,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->ip('192.168.56.101'));
         $this->assertTrue($this->is->ip('127.0.0.1'));
         $this->assertFalse($this->is->ip('127.0.0.1256'));
-        $this->assertFalse($this->is->not()->ip('10.0.0.5'));
+        $this->assertFalse($this->is->not->ip('10.0.0.5'));
 
         //ipv6
         $this->assertTrue($this->is->ip('::1'));
@@ -174,7 +174,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->ip('2001:db8:0:0:3456::'));
 
         //others
-        $this->assertTrue($this->is->not()->ip('localhost'));
+        $this->assertTrue($this->is->not->ip('localhost'));
     }
 
     public function testIpv4()
@@ -183,7 +183,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->ipv4('192.168.56.101'));
         $this->assertTrue($this->is->ipv4('127.0.0.1'));
         $this->assertFalse($this->is->ipv4('127.0.0.1256'));
-        $this->assertFalse($this->is->not()->ipv4('10.0.0.5'));
+        $this->assertFalse($this->is->not->ipv4('10.0.0.5'));
 
         //ipv6
         $this->assertFalse($this->is->ipv4('::1'));
@@ -191,7 +191,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->ipv4('2001:db8:0:0:3456::'));
 
         //localhost
-        $this->assertTrue($this->is->not()->ipv4('localhost'));
+        $this->assertTrue($this->is->not->ipv4('localhost'));
     }
 
     public function testIpv6()
@@ -200,7 +200,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->is->ipv6('192.168.56.101'));
         $this->assertFalse($this->is->ipv6('127.0.0.1'));
         $this->assertFalse($this->is->ipv6('127.0.0.1256'));
-        $this->assertTrue($this->is->not()->ipv6('10.0.0.5'));
+        $this->assertTrue($this->is->not->ipv6('10.0.0.5'));
 
         //ipv6
         $this->assertTrue($this->is->ipv6('::1'));
@@ -208,7 +208,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->ipv6('2001:db8:0:0:3456::'));
 
         //other
-        $this->assertTrue($this->is->not()->ipv6('localhost'));
+        $this->assertTrue($this->is->not->ipv6('localhost'));
     }
 
     public function testCreditcard()
@@ -216,8 +216,8 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->creditcard('378282246310005'));
         $this->assertFalse($this->is->creditcard('123'));
 
-        $this->assertTrue($this->is->not()->creditcard('123'));
-        $this->assertFalse($this->is->not()->creditcard('4242424242424242'));
+        $this->assertTrue($this->is->not->creditcard('123'));
+        $this->assertFalse($this->is->not->creditcard('4242424242424242'));
     }
 
     public function testMobile()
@@ -235,7 +235,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         // iPad
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (iPad; CPU OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53');
-        $this->assertTrue($this->is->not()->mobile());
+        $this->assertTrue($this->is->not->mobile());
         $this->assertFalse($this->is->mobile());
 
         // Android Mobile
@@ -246,7 +246,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         // Android Tablet
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 7 Build/LMY48G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.93 Safari/537.36');
-        $this->assertTrue($this->is->not()->mobile());
+        $this->assertTrue($this->is->not->mobile());
 
         // blackberry
         $this->is->set_SERVER('HTTP_USER_AGENT',
@@ -270,7 +270,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LMY47Z) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.93 Mobile Safari/537.36');
         $this->assertFalse($this->is->tablet());
-        $this->assertTrue($this->is->not()->tablet());
+        $this->assertTrue($this->is->not->tablet());
 
         // iPad
         $this->is->set_SERVER('HTTP_USER_AGENT',
@@ -281,7 +281,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12H143 Safari/600.1.4');
         $this->assertFalse($this->is->tablet());
-        $this->assertTrue($this->is->not()->tablet());
+        $this->assertTrue($this->is->not->tablet());
     }
 
     public function testIE()
@@ -292,14 +292,14 @@ class IsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->is->ie());
         $this->assertTrue($this->is->ie(8));
-        $this->assertFalse($this->is->not()->ie(8));
+        $this->assertFalse($this->is->not->ie(8));
 
         // IE9
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)');
 
         $this->assertTrue($this->is->ie());
-        $this->assertFalse($this->is->not()->ie());
+        $this->assertFalse($this->is->not->ie());
         $this->assertFalse($this->is->ie(8));
         $this->assertTrue($this->is->ie(9));
 
@@ -308,7 +308,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
             'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36');
 
         $this->assertFalse($this->is->ie());
-        $this->assertTrue($this->is->not()->ie());
+        $this->assertTrue($this->is->not->ie());
     }
 
     public function testChrome()
@@ -318,14 +318,14 @@ class IsTest extends \PHPUnit_Framework_TestCase
             'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36');
 
         $this->assertTrue($this->is->chrome());
-        $this->assertFalse($this->is->not()->chrome());
+        $this->assertFalse($this->is->not->chrome());
 
         // Not Chrome
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
 
         $this->assertFalse($this->is->chrome());
-        $this->assertTrue($this->is->not()->chrome());
+        $this->assertTrue($this->is->not->chrome());
     }
 
     public function testOpera()
@@ -335,14 +335,14 @@ class IsTest extends \PHPUnit_Framework_TestCase
             'Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; ja) Presto/2.10.289 Version/12.00');
 
         $this->assertTrue($this->is->opera());
-        $this->assertFalse($this->is->not()->opera());
+        $this->assertFalse($this->is->not->opera());
 
         // Not Opera
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
 
         $this->assertFalse($this->is->opera());
-        $this->assertTrue($this->is->not()->opera());
+        $this->assertTrue($this->is->not->opera());
 
     }
 
@@ -353,14 +353,14 @@ class IsTest extends \PHPUnit_Framework_TestCase
             'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0');
 
         $this->assertTrue($this->is->firefox());
-        $this->assertFalse($this->is->not()->firefox());
+        $this->assertFalse($this->is->not->firefox());
 
         // Not Firefox
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
 
         $this->assertFalse($this->is->firefox());
-        $this->assertTrue($this->is->not()->firefox());
+        $this->assertTrue($this->is->not->firefox());
     }
 
     public function testSafari()
@@ -369,13 +369,13 @@ class IsTest extends \PHPUnit_Framework_TestCase
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A');
 
         $this->assertTrue($this->is->safari());
-        $this->assertFalse($this->is->not()->safari());
+        $this->assertFalse($this->is->not->safari());
 
         $this->is->set_SERVER('HTTP_USER_AGENT',
             'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko');
 
         $this->assertFalse($this->is->safari());
-        $this->assertTrue($this->is->not()->safari());
+        $this->assertTrue($this->is->not->safari());
     }
 
     public function testRemoteStatusCode()
@@ -383,14 +383,14 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/200', '200'));
         $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/201', 201));
         $this->assertTrue($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/400', 400));
-        $this->assertTrue($this->is->not()->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/404', 400));
+        $this->assertTrue($this->is->not->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/404', 400));
         $this->assertFalse($this->is->http_status_code('http://ozuma.sakura.ne.jp/httpstatus/501', 500));
     }
 
     public function testStrInclude()
     {
         $this->assertTrue($this->is->str_include('nick', 'n'));
-        $this->assertFalse($this->is->not()->str_include('nick', 'n'));
+        $this->assertFalse($this->is->not->str_include('nick', 'n'));
         $this->assertFalse($this->is->str_include('takuya', 'nishi'));
     }
 
@@ -399,7 +399,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->same_type('1', '1'));
         $this->assertFalse($this->is->same_type(1, '1'));
         $this->assertFalse($this->is->same_type(1, 1.0));
-        $this->assertTrue($this->is->not()->same_type('true', true));
+        $this->assertTrue($this->is->not->same_type('true', true));
     }
 
     public function testSameClass()
@@ -411,7 +411,7 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $test4 = new \testClass\sampleClass2();
         $this->assertTrue($this->is->same_class($test, $test2));
         $this->assertFalse($this->is->same_class($test, $test3));
-        $this->assertFalse($this->is->not()->same_class($test, $test2));
+        $this->assertFalse($this->is->not->same_class($test, $test2));
         $this->assertFalse($this->is->same_class($test3, $test4));
     }
 
@@ -419,14 +419,14 @@ class IsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->is->start_width('text', 'tex'));
         $this->assertFalse($this->is->start_width('abc', 'bc'));
-        $this->assertTrue($this->is->not()->start_width('abc', 'bc'));
+        $this->assertTrue($this->is->not->start_width('abc', 'bc'));
     }
 
     public function testEndWidth()
     {
         $this->assertTrue($this->is->end_width('test', 'est'));
         $this->assertFalse($this->is->end_width('test', 'tes'));
-        $this->assertTrue($this->is->not()->end_width('test', 'tes'));
+        $this->assertTrue($this->is->not->end_width('test', 'tes'));
     }
 
     public function testRenge()
@@ -434,7 +434,6 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->is->range(100, 1, 100));
         $this->assertFalse($this->is->range(1000, 1, 100));
         $this->assertFalse($this->is->range(1, 10, 100));
-        $this->assertTrue($this->is->not()->range(1, 10, 100));
+        $this->assertTrue($this->is->not->range(1, 10, 100));
     }
-
 }
