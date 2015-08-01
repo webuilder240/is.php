@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Is.php by webuilder240</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Is.php</h1>
+        <p class="header"></p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/webuilder240/is.php/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/webuilder240/is.php/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/webuilder240/is.php">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/webuilder240">webuilder240</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="isphp-005" class="anchor" href="#isphp-005" aria-hidden="true"><span class="octicon octicon-link"></span></a>is.php 0.0.5</h1>
+
+<p><a href="https://packagist.org/packages/webuilder240/is-php"></a><a href="https://scrutinizer-ci.com/g/webuilder240/is.php/?branch=master"><img src="https://scrutinizer-ci.com/g/webuilder240/is.php/badges/coverage.png?b=master" alt="Code Coverage"></a> <img src="https://poser.pugx.org/webuilder240/is-php/version" alt="Latest Stable Version"> <a href="https://travis-ci.org/webuilder240/is.php"><img src="https://travis-ci.org/webuilder240/is.php.svg?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage:</h1>
+
+<div class="highlight highlight-bash"><pre>composer require webuilder240/is-php</pre></div>
+
+<h1>
+<a id="web-server-check" class="anchor" href="#web-server-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web Server Check:</h1>
+
+<h2>
+<a id="isisapache" class="anchor" href="#isisapache" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::apache()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>apache(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current run server is apache</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisbuild_in_server" class="anchor" href="#isisbuild_in_server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::build_in_server()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>build_in_server(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current run server is php build_in_server(cli-server)</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h1>
+<a id="server-check" class="anchor" href="#server-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server Check:</h1>
+
+<h2>
+<a id="isisssl" class="anchor" href="#isisssl" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::ssl()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>ssl(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current run server protocol is 'ssl'</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isislocalhost" class="anchor" href="#isislocalhost" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::localhost()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>localhost(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current run server ip is 'localhost' or 127.0.0.1</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isishostvaluestring" class="anchor" href="#isishostvaluestring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::host(value:string)</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>host(<span class="pl-s"><span class="pl-pds">'</span>www.google.com<span class="pl-pds">'</span></span>); </span>
+<span class="pl-s1"><span class="pl-c">// true if current run server host name is 'www.google.com'</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isishost_ipvaluestring" class="anchor" href="#isishost_ipvaluestring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::host_ip(value:string)</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>host_ip(<span class="pl-s"><span class="pl-pds">'</span>192.168.56.101<span class="pl-pds">'</span></span>); </span>
+<span class="pl-s1"><span class="pl-c">// true if current run server host ip address '192.168.56.101'</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h1>
+<a id="useragent-check" class="anchor" href="#useragent-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>UserAgent Check</h1>
+
+<h2>
+<a id="isischrome" class="anchor" href="#isischrome" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::chrome()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>chorme();</span>
+<span class="pl-s1"><span class="pl-c">// true if current browser is chrome </span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisfirefox" class="anchor" href="#isisfirefox" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::firefox()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>firefox();</span>
+<span class="pl-s1"><span class="pl-c">// true if current browser is firefox </span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isissafari" class="anchor" href="#isissafari" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::safari()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>safari();</span>
+<span class="pl-s1"><span class="pl-c">// true if current browser is safari</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisopera" class="anchor" href="#isisopera" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::opera()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>opera();</span>
+<span class="pl-s1"><span class="pl-c">// true if current browser is opera</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisieversionint" class="anchor" href="#isisieversionint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::ie(version:int)</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>ie();</span>
+<span class="pl-s1"><span class="pl-c">// true if current browser is ie</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>ie(<span class="pl-c1">8</span>);</span>
+<span class="pl-s1"><span class="pl-c">// true if current brower is ie version 8</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisios" class="anchor" href="#isisios" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::ios()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>ios(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current device has iOS</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisandroid" class="anchor" href="#isisandroid" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::android();</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>android(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current device has Android OS</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isismobile-phone" class="anchor" href="#isismobile-phone" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::mobile() [phone]</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>mobile(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current device is mobile (phone)</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isistablet" class="anchor" href="#isistablet" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::tablet()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>tablet(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current device is tablet</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h1>
+<a id="httpmethod-check" class="anchor" href="#httpmethod-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>HttpMethod Check</h1>
+
+<h2>
+<a id="isisrequest_get" class="anchor" href="#isisrequest_get" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::request_get()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>request_get(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current request is GET request</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisrequest_post" class="anchor" href="#isisrequest_post" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::request_post()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>request_post(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current request is POST request</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisrequest_put" class="anchor" href="#isisrequest_put" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::request_put()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>request_put(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current request is PUT request</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisrequest_patch" class="anchor" href="#isisrequest_patch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::request_patch()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>request_patch(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current request is PATCH request</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isisrequest_delete" class="anchor" href="#isisrequest_delete" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::request_delete()</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>request_delete(); </span>
+<span class="pl-s1"><span class="pl-c">// true if current request is DELETE request</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="isishttp_status_codeuristringhttp_codeint" class="anchor" href="#isishttp_status_codeuristringhttp_codeint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::http_status_code(uri:string,http_code:int)</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>http_status_code(<span class="pl-s"><span class="pl-pds">'</span>http://google.com<span class="pl-pds">'</span></span>,<span class="pl-c1">302</span>); </span>
+<span class="pl-s1"><span class="pl-c">// true if http://google.com is responsed http_status_code 302</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h1>
+<a id="typecheck" class="anchor" href="#typecheck" aria-hidden="true"><span class="octicon octicon-link"></span></a>TypeCheck</h1>
+
+<h2>
+<a id="isissame_typevalanyvalany" class="anchor" href="#isissame_typevalanyvalany" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::same_type(val:any,val:any)</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>same_type(<span class="pl-c1">1</span>,<span class="pl-c1">2</span>);</span>
+<span class="pl-s1"><span class="pl-c">// true </span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>same_type(<span class="pl-s"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span>,<span class="pl-c1">2</span>);</span>
+<span class="pl-s1"><span class="pl-c">// false</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<h1>
+<a id="string-check" class="anchor" href="#string-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>String Check</h1>
+
+<h2>
+<a id="isisstr_includestrstringsearch_wordstring" class="anchor" href="#isisstr_includestrstringsearch_wordstring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is\Is::str_include(str:string,search_word:string)</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>str_include(<span class="pl-s"><span class="pl-pds">'</span>nick<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-c">// true </span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">Is\</span><span class="pl-c1">Is</span><span class="pl-k">::</span>str_include(<span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>text);</span></span>
+<span class="pl-s1"><span class="pl-s">// false</span></span>
+<span class="pl-s1"><span class="pl-s"></span></span></pre></div>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
