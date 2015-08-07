@@ -60,11 +60,7 @@ class Is
             return false;
         }
 
-        if ($_SERVER['SERVER_NAME'] === '127.0.0.1' || $_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '0.0.0.0') {
-            return true;
-        }
-
-        return false;
+        return $_SERVER['SERVER_NAME'] === '127.0.0.1' || $_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '0.0.0.0';
     }
 
     /**
@@ -77,15 +73,7 @@ class Is
             return false;
         }
 
-        if ($host === "localhost" || $host === '127.0.0.1' || $host === '0.0.0.0') {
-            return true;
-        }
-
-        if ($_SERVER['SERVER_NAME'] === $host) {
-            return true;
-        }
-
-        return false;
+        return self::localhost() || $_SERVER['SERVER_NAME'] === $host;
     }
 
     /**
@@ -404,12 +392,8 @@ class Is
      */
     public static function creditcard($num)
     {
-        if (preg_match("/^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/",
-            $num)) {
-            return true;
-        }
-
-        return false;
+        return !!preg_match("/^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/",
+            $num);
     }
 
     /**
