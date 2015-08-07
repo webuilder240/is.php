@@ -381,4 +381,13 @@ class IsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Is::range(1, 10, 100));
     }
 
+    public function testIsInteger()
+    {
+        $this->assertTrue(Is::integer('111'));
+        $this->assertFalse(Is::integer('1.11'));
+        $this->assertTrue(Is::integer(111));
+        $this->assertFalse(Is::integer(1.11));
+        $this->assertFalse(Is::integer('string'));
+    }
+
 }

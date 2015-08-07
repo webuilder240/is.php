@@ -98,11 +98,7 @@ class Is
             return false;
         }
 
-        if ($_SERVER['SERVER_ADDR'] === $ip) {
-            return true;
-        }
-
-        return false;
+        return $_SERVER['SERVER_ADDR'] === $ip;
     }
 
 
@@ -500,4 +496,16 @@ class Is
     {
         return ($check_num >= $min) && ($check_num <= $max);
     }
+
+    /**
+     * @param $num
+     * @return bool
+     */
+    public static function integer($num)
+    {
+        if (is_integer($num) || is_float($num) || is_string($num)) {
+            return !!preg_match('/^-?[0-9]+$/', $num);
+        }
+    }
+
 }
